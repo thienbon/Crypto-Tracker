@@ -11,6 +11,7 @@ module.exports = {
         'brown': '#c1ae93',
         'beige': '#a7ab90',
         'red': '#FF0000	',
+        'cyan': '#14ffec',
         'gray': {100: "#808080", 200: "#323223" , 300: "#212121"}
       },
       fontFamily: {
