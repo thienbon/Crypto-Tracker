@@ -10,9 +10,10 @@ module.exports = {
         'green-grey': '#A2A378',
         'brown': '#c1ae93',
         'beige': '#a7ab90',
-        'red': '#FF0000	',
+        'red': '#d6436e	',
+        'green': '#25da72',
         'cyan': '#14ffec',
-        'gray': {100: "#808080", 200: "#323223" , 300: "#212121"}
+        'gray': {100: "#808080", 200: "#323232" , 300: "#212121"}
       },
       fontFamily: {
         nunito:"Nunito"
@@ -27,6 +28,6 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar")],
 }
 
