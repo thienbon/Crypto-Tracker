@@ -1,8 +1,15 @@
 import React from 'react'
+import searchIcon from '../assets/search-icon.svg';
 
 const Search = () => {
   return (
-    <div>Search</div>
+    <form>
+      <input type="text" name="search" />
+      <button type="submit">
+        <img src={searchIcon} alt="search" />
+      </button>
+
+    </form>
   )
 }
 
