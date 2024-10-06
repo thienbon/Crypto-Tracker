@@ -1,22 +1,11 @@
+import debounce from 'lodash.debounce';
 import React, { useContext, useState } from 'react';
 import searchIcon from '../assets/search-icon.svg';
 import { CryptoContext } from "./../context/CryptoContext";
-
-const Search = () => {
+const SearchInput = () => {
   const [searchText, setsearchText] = useState("");
-  let {getSearchResult} = useContext(CryptoContext);
-
-  let handleInput = (e) => {
-    e.preventDefault();
-    let query = e.target.value;
-    setsearchText(query);
-    getSearchResult(query);
-  };
-
-
-  return (
-    <>
-      <form className='w-96 relative flex items-center
+  return(
+    <form className='w-96 relative flex items-center
     ml-7 font-nunito'>
         <input type="text" name="search"
           onChange={handleInput}
@@ -40,9 +29,27 @@ const Search = () => {
         null
       }
 
+  )
+}
+const Search = () => {
+  
+  let {getSearchResult} = useContext(CryptoContext);
+  const debounceFunc =debounce(function(val){
+    getSearchResult(val);
+  },2000);
+
+  let handleInput = (e) => {
+    e.preventDefault();
+    let query = e.target.value;
+    setsearchText(query);
+    debounceFunc(query);
+  };
 
 
-    </>
+  return (
+    <div className="relative">
+      <SearchInput handleSearch={debounceFunc} />
+    </div>
   )
 }
 
