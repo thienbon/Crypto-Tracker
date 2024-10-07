@@ -2,10 +2,23 @@ import debounce from 'lodash.debounce';
 import React, { useContext, useState } from 'react';
 import searchIcon from '../assets/search-icon.svg';
 import { CryptoContext } from "./../context/CryptoContext";
-const SearchInput = () => {
+const SearchInput = ({handleSearch}) => {
   const [searchText, setsearchText] = useState("");
-  return(
-    <form className='w-96 relative flex items-center
+  let {SearchData,setCoinSearch,setSearchData} = useContext(CryptoContext);
+  let handleInput = (e) => {
+    e.preventDefault();
+    let query = e.target.value;
+    setsearchText(query);
+    handleSearch(query);
+  };
+  const selectCoin = (coin) =>{
+    setCoinSearch(coin);
+    setsearchText("");
+    setSearchData();
+  }
+  return (
+    <>
+      <form className='w-96 relative flex items-center
     ml-7 font-nunito'>
         <input type="text" name="search"
           onChange={handleInput}
@@ -19,31 +32,35 @@ const SearchInput = () => {
 
       </form>
       {
-        searchText.length > 0 ?
-        <ul className='absolute top-11 right-0 w-full h-96 rounded
+        searchText.length > 0 ?(
+          <ul className='absolute top-11 right-0 w-96 h-96 rounded
         overflow-x-hidden py-2 bg-gray-200 bg-opacity-60 backdrop-blur-md'>
-          <li>bitcoin</li>
-          <li>etherum</li>
-        </ul>
-        :
-        null
+            {
+              SearchData ? SearchData.map(coin => {return <li
+              className="flex items-center ml-4 my-2 cursor-pointer hover:bg-gray-200"
+              key = {coin.id}
+              onClick={() => selectCoin(coin.id)}
+              ><img className="w-[1rem] h-[1rem] mx-1.5"src={coin.thumb} alt={coin.name}/>
+              <span>{coin.name}</span>
+              </li>}) : <h2>please wait...</h2>
+            }
+          </ul>)
+          :
+          null
       }
+    </>
+
 
   )
 }
 const Search = () => {
-  
-  let {getSearchResult} = useContext(CryptoContext);
-  const debounceFunc =debounce(function(val){
-    getSearchResult(val);
-  },2000);
 
-  let handleInput = (e) => {
-    e.preventDefault();
-    let query = e.target.value;
-    setsearchText(query);
-    debounceFunc(query);
-  };
+  let { getSearchResult } = useContext(CryptoContext);
+  const debounceFunc = debounce(function (val) {
+    getSearchResult(val);
+  }, 2000);
+
+
 
 
   return (
