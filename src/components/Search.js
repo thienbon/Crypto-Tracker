@@ -11,6 +11,11 @@ const SearchInput = ({handleSearch}) => {
     setsearchText(query);
     handleSearch(query);
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleSearch(searchText);
+
+  }
   const selectCoin = (coin) =>{
     setCoinSearch(coin);
     setsearchText("");
@@ -19,7 +24,10 @@ const SearchInput = ({handleSearch}) => {
   return (
     <>
       <form className='w-96 relative flex items-center
-    ml-7 font-nunito'>
+    ml-7 font-nunito'
+    onSubmit={handleSubmit}
+    >
+      
         <input type="text" name="search"
           onChange={handleInput}
           value={searchText}
@@ -42,7 +50,11 @@ const SearchInput = ({handleSearch}) => {
               onClick={() => selectCoin(coin.id)}
               ><img className="w-[1rem] h-[1rem] mx-1.5"src={coin.thumb} alt={coin.name}/>
               <span>{coin.name}</span>
-              </li>}) : <h2>please wait...</h2>
+              </li>}) : <div className='w-full h-full flex flex-col justify-center items-center'>
+                <div className='w-8 h-8 border-4 border-cyan rounded-full border-b-gray-200 animate-spin' role='status'/> 
+                <span className='mt-2'>Waiting pls...</span>
+
+              </div>
             }
           </ul>)
           :

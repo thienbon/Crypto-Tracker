@@ -43,7 +43,7 @@ ${
             return ` w-full text-base text-center font-nunito m-2.5
     ${isActive ? 'bg-cyan text-gray-300 ': 'bg-gray-100 text-white hover:text-cyan active:bg-cyan active:text-gray-300'}
            
-            broder-0 cursor-pointer rounded capitalize font-semibold`
+            border-0 cursor-pointer rounded capitalize font-semibold`
         }
     }>Saved</NavLink>
     </nav>
