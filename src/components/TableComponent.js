@@ -4,7 +4,7 @@ import { CryptoContext } from '../context/CryptoContext'
 
 
 const TableComponent = () => {
-    let { CryptoData } = useContext(CryptoContext);
+    let { CryptoData, Currency } = useContext(CryptoContext);
 
 
     return (
@@ -53,7 +53,7 @@ const TableComponent = () => {
                                         <td className='py-4'>{
                                             new Intl.NumberFormat("en-IN",{
                                                 style: "currency",
-                                                currency: "vnd"
+                                                currency: Currency
 
                                             }
                                             ).format(data.current_price)
