@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { CryptoContext } from '../context/CryptoContext'
+import Pagination from './Pagination';
 
 
 
@@ -8,7 +9,8 @@ const TableComponent = () => {
 
 
     return (
-        <div
+        <>
+                <div
             className='flex flex-col mt-9 border border-gray-100 rounded'
         >
             {
@@ -71,9 +73,15 @@ const TableComponent = () => {
                         </tbody>
                     </table> : null
             }
-
-
+            
+ 
+        
         </div>
+        <div className='flex items-center justify-between mt-4 capitalize h-[2rem]'>
+        <Pagination/> 
+        </div>
+        </>
+
     )
 }
 
